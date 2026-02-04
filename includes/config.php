@@ -4,7 +4,7 @@
  */
 
 // Deployment Environment (development/production)
-define('APP_ENV', 'development');
+define('APP_ENV', 'production');
 
 // Site Metadata
 define('SITE_NAME', 'KNET NETWORK SOLUTIONS LIMITED');
@@ -17,10 +17,10 @@ define('SITE_PHONE_SECONDARY', '0704 250 216');
 define('WHATSAPP_NUMBER', '254743820177');
 
 // Database Configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'knet_db');
-define('DB_USER', 'root'); // Change for production
-define('DB_PASS', '');     // Change for production
+define('DB_HOST', 'sdb-83.hosting.stackcp.net');
+define('DB_NAME', 'knet_production-35303934f82e');
+define('DB_USER', 'knet_production-35303934f82e');
+define('DB_PASS', '48tzm3j75j');
 
 // Paths
 define('BASE_PATH', dirname(__DIR__));
