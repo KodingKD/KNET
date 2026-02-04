@@ -1,0 +1,12 @@
+name: Deploy to cPanel
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via cPanel Git
+        run: |
+          curl -X POST "${{ secrets.CPANEL_DEPLOY_HOOK }}"
