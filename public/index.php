@@ -266,3 +266,4 @@ include INCLUDES_PATH . '/header.php';
 </section>
 
 <?php include INCLUDES_PATH . '/footer.php'; ?>
+<!-- Cache Release v2.0 -->

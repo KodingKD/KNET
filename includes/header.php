@@ -140,7 +140,8 @@ require_once __DIR__ . '/components/cta-buttons.php';
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <!-- Logo -->
             <a href="index.php" class="flex items-center gap-2">
-                <img src="assets/images/logo.jpg" alt="KNET Logo" class="h-10 w-auto rounded-full">
+                <img src="<?php echo SITE_URL; ?>/assets/images/logo.jpg?v=2" alt="KNET Logo"
+                    class="h-10 w-auto rounded-full">
                 <span class="font-extrabold text-xl tracking-tighter">KNET <span
                         class="text-primary">NETWORKS</span></span>
             </a>
