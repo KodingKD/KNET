@@ -4,6 +4,8 @@ require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $page_title = "Service Coverage";
+$page_description = "Check KNET internet availability in your area. Serving Vihiga (Mbale, Chavakali), Kakamega (Town, Mumias), and Nairobi (Westlands, Kilimani).";
+$page_keywords = "Internet Coverage Vihiga, Wifi Availability Kakamega, Fiber coverage Nairobi, KNET Network Map";
 include INCLUDES_PATH . '/header.php';
 
 // Fetch regions from DB

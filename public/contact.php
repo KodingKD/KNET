@@ -4,6 +4,8 @@ require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $page_title = "Contact Us";
+$page_description = "Contact KNET for internet installation, support, or site survey. Call 0743 820 177 or visit us in Vihiga, Kakamega, and Nairobi.";
+$page_keywords = "Contact KNET, KNET Support Number, Internet Customer Care, KNET Location, Report Fault";
 include INCLUDES_PATH . '/header.php';
 
 $pre_selected_service = $_GET['service'] ?? $_GET['interest'] ?? '';

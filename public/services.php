@@ -4,6 +4,8 @@ require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $page_title = "Our Services";
+$page_description = "Explore KNET services including Home Fiber, Business Internet, Public Wi-Fi Hotspots, and Starlink Installation in Vihiga, Kakamega, and Nairobi.";
+$page_keywords = "Home Fiber Kenya, Business Internet, Starlink Installation Kenya, Public WiFi Hotspots, Network Infrastructure, KNET Services";
 include INCLUDES_PATH . '/header.php';
 
 $services = [

@@ -3,7 +3,9 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
-$page_title = "Fast. Reliable. Unlimited Internet.";
+$page_title = "Home";
+$page_description = "KNET provides fast, reliable, and unlimited fiber and wireless internet in Vihiga, Kakamega, and Nairobi. 100% UNLIMITED Internet with no data caps.";
+$page_keywords = "Unlimited Internet Vihiga, Fiber Internet Kakamega, Wifi Nairobi, ISP Vihiga, KNET Networks, Home Internet, Business Fiber";
 include INCLUDES_PATH . '/header.php';
 ?>
 

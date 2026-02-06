@@ -7,11 +7,48 @@ require_once __DIR__ . '/components/cta-buttons.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?php echo isset($page_title) ? $page_title . ' | ' . SITE_NAME : SITE_NAME; ?>
-    </title>
+
+    <!-- Primary Meta Tags -->
+    <title><?php echo isset($page_title) ? $page_title . ' | ' . SITE_NAME : SITE_NAME; ?></title>
+    <meta name="title" content="<?php echo isset($page_title) ? $page_title . ' | ' . SITE_NAME : SITE_NAME; ?>">
     <meta name="description"
+        content="<?php echo $page_description ?? 'Fast, Reliable, and Unlimited Internet for Homes and Businesses in Vihiga, Kakamega, and Nairobi. 100% Fiber & Wireless solutions.'; ?>">
+    <meta name="keywords"
+        content="<?php echo $page_keywords ?? 'Internet Service Provider, ISP Kenya, Vihiga Internet, Kakamega Fiber, Nairobi Wifi, Unlimited Internet, KNET'; ?>">
+    <meta name="author" content="KNET Network Solutions Limited">
+
+    <!-- Canonical URL -->
+    <?php
+    $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $current_url = strtok($current_url, '?'); // Remove query params for canonical
+    ?>
+    <link rel="canonical" href="<?php echo $current_url; ?>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo $current_url; ?>">
+    <meta property="og:title" content="<?php echo isset($page_title) ? $page_title . ' | ' . SITE_NAME : SITE_NAME; ?>">
+    <meta property="og:description"
         content="<?php echo $page_description ?? 'Fast, Reliable, and Unlimited Internet for Homes and Businesses in Vihiga, Kakamega, and Nairobi.'; ?>">
+    <meta property="og:image" content="<?php echo $page_image ?? 'https://knet.co.ke/assets/images/og-image.jpg'; ?>">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<?php echo $current_url; ?>">
+    <meta property="twitter:title"
+        content="<?php echo isset($page_title) ? $page_title . ' | ' . SITE_NAME : SITE_NAME; ?>">
+    <meta property="twitter:description"
+        content="<?php echo $page_description ?? 'Fast, Reliable, and Unlimited Internet for Homes and Businesses in Vihiga, Kakamega, and Nairobi.'; ?>">
+    <meta property="twitter:image"
+        content="<?php echo $page_image ?? 'https://knet.co.ke/assets/images/og-image.jpg'; ?>">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg" />
+    <link rel="shortcut icon" href="favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="KNET" />
+    <link rel="manifest" href="favicons/site.webmanifest" />
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>

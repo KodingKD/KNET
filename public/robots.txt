@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /includes/
+Disallow: /api/
+Disallow: /database/
+Disallow: /.git/
+
+Sitemap: https://knet.co.ke/sitemap.xml

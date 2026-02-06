@@ -4,6 +4,8 @@ require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $page_title = "About Us";
+$page_description = "Learn about KNET, a licensed ISP provided high speed internet in Western Kenya. Trusted by 1000+ homes and businesses.";
+$page_keywords = "About KNET, Licensed ISP Kenya, KNET Vihiga, KNET Team, Internet Providers Western Kenya";
 include INCLUDES_PATH . '/header.php';
 ?>
 

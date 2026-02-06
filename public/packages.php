@@ -4,6 +4,8 @@ require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $page_title = "Internet Packages";
+$page_description = "Affordable unlimted internet packages starting from 10mbps. No data caps, free installation options available in Vihiga and Kakamega.";
+$page_keywords = "Internet Packages Kenya, Unlimited WiFi Prices, 10Mbps Internet, Home Fiber Packages, Cheap Internet Vihiga";
 include INCLUDES_PATH . '/header.php';
 
 $package_groups = [

@@ -33,17 +33,27 @@ function get_db_connection()
         try {
             $pdo = new PDO($dsn, $user, $pass, $options);
         } catch (PDOException $e) {
-            // DEBUGGING: Show exactly what we tried to connect to
-            die("<h1>Database Connection Failed</h1>
-                 <p><strong>Error:</strong> " . $e->getMessage() . "</p>
-                 <hr>
-                 <h3>Debug Details:</h3>
-                 <ul>
-                    <li><strong>Attempted Host:</strong> $host</li>
-                    <li><strong>Attempted DB:</strong> $name</li>
-                    <li><strong>Env Constant:</strong> " . (defined('APP_ENV') ? APP_ENV : 'NOT_DEFINED') . "</li>
-                 </ul>
-                 <p><em>Please verify these details match your StackCP configuration.</em></p>");
+            // Check environment to determine error verbosity
+            $isDev = (defined('APP_ENV') && APP_ENV === 'development');
+
+            if ($isDev) {
+                // DEVELOPMENT: Show detailed debug info
+                die("<h1>Database Connection Failed</h1>
+                     <p><strong>Error:</strong> " . $e->getMessage() . "</p>
+                     <hr>
+                     <h3>Debug Details:</h3>
+                     <ul>
+                        <li><strong>Attempted Host:</strong> $host</li>
+                        <li><strong>Attempted DB:</strong> $name</li>
+                        <li><strong>Env Constant:</strong> " . (defined('APP_ENV') ? APP_ENV : 'NOT_DEFINED') . "</li>
+                     </ul>");
+            } else {
+                // PRODUCTION: Show generic user-friendly error
+                // Log the actual error to PHP error log for admins to check
+                error_log("DB Connection Error: " . $e->getMessage());
+                die("<h1>Service Temporarily Unavailable</h1>
+                     <p>We are currently experiencing technical difficulties. Please check back shortly.</p>");
+            }
         }
     }
 
