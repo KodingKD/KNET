@@ -22,7 +22,7 @@ $services = [
             '24/7 Priority Support',
             'Zero Throttling'
         ],
-        'image' => 'https://images.unsplash.com/photo-1551703599-6b3e8379aa8b?q=80&w=2072&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop'
     ],
     [
         'id' => 'business',
@@ -37,7 +37,7 @@ $services = [
             'Low Latency for VoIP & Cloud',
             'Customizable Bandwidth'
         ],
-        'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop'
     ],
     [
         'id' => 'hotspots',
@@ -52,7 +52,7 @@ $services = [
             'Usage Analytics',
             'Bandwidth Management'
         ],
-        'image' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop'
     ],
     [
         'id' => 'wireless',
@@ -67,7 +67,7 @@ $services = [
             'Scalable Bandwidth',
             'Cost-effective Rural Links'
         ],
-        'image' => 'https://images.unsplash.com/photo-1512428559083-a40ea903330d?q=80&w=2070&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop'
     ],
     [
         'id' => 'starlink',
@@ -82,7 +82,7 @@ $services = [
             'Technical Troubleshooting',
             'Optimization Services'
         ],
-        'image' => 'https://images.unsplash.com/photo-1614728263952-84ea206f99b6?q=80&w=2032&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&auto=format&fit=crop'
     ],
     [
         'id' => 'network',
@@ -97,7 +97,7 @@ $services = [
             'CCTV Network Integration',
             'Annual Maintenance Contracts'
         ],
-        'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2068&auto=format&fit=crop'
+        'image' => 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop'
     ]
 ];
 ?>
