@@ -1,0 +1,15 @@
+{
+    "name": "KNET Network Solutions",
+    "short_name": "KNET",
+    "start_url": "./index.php",
+    "display": "standalone",
+    "background_color": "#0F172A",
+    "theme_color": "#007BFF",
+    "icons": [
+        {
+            "src": "assets/images/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
