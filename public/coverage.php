@@ -108,9 +108,9 @@ try {
     </div>
 </section>
 
-<!-- Static Map Display -->
+<!-- Interactive Coverage Map -->
 <section class="py-24 px-4 md:px-8 border-t border-white/5 bg-white/[0.01]">
-    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
         <div class="flex-1">
             <h2 class="text-3xl md:text-5xl font-black mb-6">Strategic Network Nodes.</h2>
             <p class="text-lg text-slate-400 mb-8 leading-relaxed">
@@ -118,35 +118,100 @@ try {
                 points have the highest possible bandwidth capacity.
             </p>
             <div class="space-y-4">
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors"
+                    onclick="focusMap(0)">
                     <span
                         class="w-10 h-10 bg-accent/20 text-accent rounded-full flex items-center justify-center font-bold">1</span>
-                    <span class="text-slate-300 font-medium">Nairobi Datacenter Uplinks</span>
+                    <div>
+                        <span class="text-slate-300 font-bold block">Nairobi Datacenter Uplinks</span>
+                        <span class="text-slate-500 text-sm">Westlands & Kilimani Backbone</span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors"
+                    onclick="focusMap(1)">
                     <span
                         class="w-10 h-10 bg-accent/20 text-accent rounded-full flex items-center justify-center font-bold">2</span>
-                    <span class="text-slate-300 font-medium">Regional Wireless Hubs in Kakamega & Vihiga</span>
+                    <div>
+                        <span class="text-slate-300 font-bold block">Regional Wireless Hubs</span>
+                        <span class="text-slate-500 text-sm">Kakamega & Vihiga High Sites</span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors"
+                    onclick="focusMap(2)">
                     <span
                         class="w-10 h-10 bg-accent/20 text-accent rounded-full flex items-center justify-center font-bold">3</span>
-                    <span class="text-slate-300 font-medium">Local Fiber Distribution Points (FTTH)</span>
+                    <div>
+                        <span class="text-slate-300 font-bold block">Local Distribution</span>
+                        <span class="text-slate-500 text-sm">FTTH & P2P Last Mile</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="mt-8 bg-primary/10 border border-primary/20 p-4 rounded-xl flex items-start gap-4">
+                <i data-lucide="info" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
+                <p class="text-sm text-slate-400">
+                    <strong class="text-primary block mb-1">Interactive Map</strong>
+                    Click on the colored zones to see coverage details. Zoom in to see street-level availability.
+                </p>
+            </div>
         </div>
+
         <div
-            class="flex-1 w-full h-[400px] bg-card-bg rounded-[40px] border border-white/10 relative overflow-hidden flex items-center justify-center">
-            <!-- Mock Map Graphic -->
-            <div
-                class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]">
-            </div>
-            <div class="relative text-center">
-                <i data-lucide="map" class="w-20 h-20 text-primary/30 mx-auto mb-4"></i>
-                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Interactive Map Coming Soon</p>
-            </div>
+            class="flex-1 w-full h-[500px] bg-card-bg rounded-[40px] border border-white/10 relative overflow-hidden shadow-2xl z-0">
+            <div id="coverage-map" class="w-full h-full z-10"></div>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var map = L.map('coverage-map', {
+            zoomControl: true,
+            scrollWheelZoom: true
+        }).setView([0.1, 35.5], 7);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        var zones = [
+            {
+                name: 'Nairobi Node',
+                lat: -1.264, lng: 36.804,
+                color: '#007BFF', radius: 6000,
+                desc: '<strong>Nairobi Backbone</strong><br>Westlands & Kilimani<br>Datacenter Uplinks<br><em>Fiber & Wireless</em>'
+            },
+            {
+                name: 'Kakamega Node',
+                lat: 0.2827, lng: 34.7519,
+                color: '#A4F500', radius: 5000,
+                desc: '<strong>Kakamega Hub</strong><br>Town & Milimani<br>Regional Wireless<br><em>Fiber & Wireless</em>'
+            },
+            {
+                name: 'Vihiga Node',
+                lat: 0.0863, lng: 34.7223,
+                color: '#00D4FF', radius: 4000,
+                desc: '<strong>Vihiga Hub</strong><br>Mbale & Chavakali<br>Local Distribution<br><em>Fiber & P2P</em>'
+            }
+        ];
+
+        zones.forEach(function (zone) {
+            L.circle([zone.lat, zone.lng], {
+                color: zone.color,
+                fillColor: zone.color,
+                fillOpacity: 0.15,
+                radius: zone.radius,
+                weight: 2
+            }).addTo(map).bindPopup(zone.desc);
+        });
+
+        window.focusMap = function (index) {
+            var z = zones[index];
+            map.flyTo([z.lat, z.lng], 13, { duration: 1.5 });
+        };
+    });
+</script>
 
 <?php include INCLUDES_PATH . '/footer.php'; ?>

@@ -50,6 +50,10 @@ require_once __DIR__ . '/components/cta-buttons.php';
     <meta name="apple-mobile-web-app-title" content="KNET" />
     <link rel="manifest" href="favicons/site.webmanifest" />
 
+    <!-- Leaflet.js for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
