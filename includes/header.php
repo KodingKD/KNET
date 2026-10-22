@@ -101,6 +101,29 @@ require_once __DIR__ . '/components/cta-buttons.php';
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Fallback styles in case Tailwind Play CDN is blocked by Brave Shields or ad blockers */
+        header img {
+            height: 40px !important;
+            width: 40px !important;
+            max-height: 40px !important;
+            max-width: 40px !important;
+            object-fit: cover !important;
+            border-radius: 9999px !important;
+        }
+
+        .h-10 {
+            height: 2.5rem !important;
+            max-height: 2.5rem !important;
+        }
+
+        @media (max-width: 1023px) {
+            header nav {
+                display: none;
+            }
         }
 
         h1,
@@ -145,6 +168,8 @@ require_once __DIR__ . '/components/cta-buttons.php';
             <!-- Logo -->
             <a href="index.php" class="flex items-center gap-2">
                 <img src="<?php echo SITE_URL; ?>/assets/images/logo.jpg?v=2" alt="KNET Logo"
+                    width="40" height="40"
+                    style="height: 40px; width: 40px; max-width: 40px; max-height: 40px; object-fit: cover; border-radius: 9999px;"
                     class="h-10 w-auto rounded-full">
                 <span class="font-extrabold text-xl tracking-tighter">KNET <span
                         class="text-primary">NETWORKS</span></span>

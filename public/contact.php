@@ -140,17 +140,27 @@ $pre_selected_service = $_GET['service'] ?? $_GET['interest'] ?? '';
 
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-slate-400 mb-2">Service of Interest</label>
-                    <select name="service_interest"
-                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all appearance-none">
-                        <option value="Home Fiber" <?php echo ($pre_selected_service === 'Home Fiber' || strpos($pre_selected_service, 'Home') !== false) ? 'selected' : ''; ?>>Home Fiber Internet
-                        </option>
-                        <option value="Business Internet" <?php echo (strpos($pre_selected_service, 'Business') !== false) ? 'selected' : ''; ?>>Business / Dedicated Internet</option>
-                        <option value="Wi-Fi Hotspots" <?php echo (strpos($pre_selected_service, 'Hotspot') !== false) ? 'selected' : ''; ?>>Public Wi-Fi Hotspots</option>
-                        <option value="Wireless P2P" <?php echo (strpos($pre_selected_service, 'Wireless') !== false) ? 'selected' : ''; ?>>Wireless / P2P Links</option>
-                        <option value="Starlink" <?php echo (strpos($pre_selected_service, 'Starlink') !== false) ? 'selected' : ''; ?>>Starlink Installation</option>
-                        <option value="Other" <?php echo $pre_selected_service === 'Other' ? 'selected' : ''; ?>>Other
-                            Inquiries</option>
-                    </select>
+                    <div class="relative">
+                        <select name="service_interest"
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer">
+                            <option value="Home Fiber" <?php echo ($pre_selected_service === 'Home Fiber' || strpos($pre_selected_service, 'Home') !== false) ? 'selected' : ''; ?>>
+                                Home Fiber Internet
+                            </option>
+                            <option value="Business Internet" <?php echo (strpos($pre_selected_service, 'Business') !== false) ? 'selected' : ''; ?>>
+                                Business / Dedicated Internet</option>
+                            <option value="Wi-Fi Hotspots" <?php echo (strpos($pre_selected_service, 'Hotspot') !== false) ? 'selected' : ''; ?>>
+                                Public Wi-Fi Hotspots</option>
+                            <option value="Wireless P2P" <?php echo (strpos($pre_selected_service, 'Wireless') !== false) ? 'selected' : ''; ?>>
+                                Wireless / P2P Links</option>
+                            <option value="Starlink" <?php echo (strpos($pre_selected_service, 'Starlink') !== false) ? 'selected' : ''; ?>>
+                                Starlink Installation</option>
+                            <option value="Other" <?php echo $pre_selected_service === 'Other' ? 'selected' : ''; ?>>Other
+                                Inquiries</option>
+                        </select>
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-8">
