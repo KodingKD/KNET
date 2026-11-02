@@ -64,6 +64,7 @@
                 <li><a href="about.php" class="hover:text-primary transition-colors">About Us</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Our Services</a></li>
                 <li><a href="packages.php" class="hover:text-primary transition-colors">Internet Packages</a></li>
+                <li><a href="infrastructure.php" class="hover:text-primary transition-colors">Carrier & Infra</a></li>
                 <li><a href="coverage.php" class="hover:text-primary transition-colors">Coverage Map</a></li>
                 <li><a href="faqs.php" class="hover:text-primary transition-colors">FAQs</a></li>
             </ul>
@@ -75,6 +76,7 @@
             <ul class="flex flex-col gap-4 text-slate-400">
                 <li><a href="services.php" class="hover:text-primary transition-colors">Home Fiber</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Business Internet</a></li>
+                <li><a href="infrastructure.php" class="hover:text-accent font-semibold text-accent transition-colors">Carrier Subcontracting</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Wireless P2P</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Wi-Fi Hotspots</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Starlink Support</a></li>

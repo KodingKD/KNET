@@ -188,7 +188,7 @@ require_once __DIR__ . '/components/cta-buttons.php';
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden lg:flex items-center gap-8 font-medium">
+            <nav class="hidden lg:flex items-center gap-6 font-medium">
                 <a href="index.php" class="nav-link <?php echo is_active_page('index.php') ? 'active' : ''; ?>">Home</a>
                 <a href="about.php"
                     class="nav-link <?php echo is_active_page('about.php') ? 'active' : ''; ?>">About</a>
@@ -196,6 +196,8 @@ require_once __DIR__ . '/components/cta-buttons.php';
                     class="nav-link <?php echo is_active_page('services.php') ? 'active' : ''; ?>">Services</a>
                 <a href="packages.php"
                     class="nav-link <?php echo is_active_page('packages.php') ? 'active' : ''; ?>">Packages</a>
+                <a href="infrastructure.php"
+                    class="nav-link <?php echo is_active_page('infrastructure.php') ? 'active' : ''; ?>">Carrier & Infra</a>
                 <a href="coverage.php"
                     class="nav-link <?php echo is_active_page('coverage.php') ? 'active' : ''; ?>">Coverage</a>
                 <a href="contact.php"
@@ -228,6 +230,7 @@ require_once __DIR__ . '/components/cta-buttons.php';
             <a href="about.php" class="text-lg font-semibold py-2">About</a>
             <a href="services.php" class="text-lg font-semibold py-2">Services</a>
             <a href="packages.php" class="text-lg font-semibold py-2">Packages</a>
+            <a href="infrastructure.php" class="text-lg font-semibold py-2 text-accent">Carrier & Infra Subcontracting</a>
             <a href="coverage.php" class="text-lg font-semibold py-2">Coverage</a>
             <a href="contact.php" class="text-lg font-semibold py-2 border-b border-white/10">Contact</a>
 
