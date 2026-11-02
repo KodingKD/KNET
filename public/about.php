@@ -25,7 +25,7 @@ include INCLUDES_PATH . '/header.php';
             <h2 class="text-3xl md:text-5xl font-black mb-8">Empowering Communities Through Technology.</h2>
             <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
                 <p>
-                    Founded with a vision to bridge the digital divide, **KNET NETWORK SOLUTIONS LIMITED** has grown
+                    Founded with a vision to bridge the digital divide, <strong class="text-white font-semibold">KNET NETWORK SOLUTIONS LIMITED</strong> has grown
                     from a local startup to a leading Internet Service Provider (ISP) serving Vihiga, Kakamega, and
                     Nairobi.
                 </p>
