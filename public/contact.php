@@ -42,12 +42,6 @@ $pre_selected_service = $_GET['service'] ?? $_GET['interest'] ?? '';
                                 <span class="font-semibold text-white"><?php echo SITE_PHONE; ?></span>
                                 <span class="text-xs text-slate-400 bg-white/5 px-2 py-0.5 rounded">Primary Helpline</span>
                             </a>
-                            <a href="<?php echo format_tel_link(SITE_PHONE_CORPORATE); ?>"
-                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group">
-                                <i data-lucide="building" class="w-4 h-4 text-primary group-hover:scale-110 transition-transform"></i>
-                                <span class="font-semibold text-white"><?php echo SITE_PHONE_CORPORATE; ?></span>
-                                <span class="text-xs text-slate-400 bg-white/5 px-2 py-0.5 rounded">Corporate Line</span>
-                            </a>
                             <a href="<?php echo format_tel_link(SITE_PHONE_SECONDARY); ?>"
                                 class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group">
                                 <i data-lucide="phone" class="w-4 h-4 text-primary group-hover:scale-110 transition-transform"></i>
@@ -99,33 +93,16 @@ $pre_selected_service = $_GET['service'] ?? $_GET['interest'] ?? '';
                     </div>
                 </div>
 
-                <!-- Physical / Postal Address -->
+                <!-- Service Coverage Areas -->
                 <div class="flex gap-6 items-start">
                     <div
                         class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
                         <i data-lucide="map-pin" class="w-8 h-8"></i>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1">Office & Service Areas</h4>
-                        <p class="text-white font-medium"><?php echo SITE_ADDRESS_PHYSICAL; ?></p>
-                        <p class="text-slate-400 text-sm mt-0.5"><?php echo SITE_ADDRESS_POSTAL; ?></p>
-                        <p class="text-slate-500 text-sm mt-1">Service Coverage: Vihiga, Kakamega, and Nairobi, Kenya</p>
-                    </div>
-                </div>
-
-                <!-- M-Pesa Paybill -->
-                <div class="flex gap-6 items-start">
-                    <div
-                        class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent shrink-0">
-                        <i data-lucide="credit-card" class="w-8 h-8"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold mb-1">M-Pesa Payments</h4>
-                        <p class="text-slate-300">
-                            <span class="text-slate-400">Paybill Number:</span>
-                            <strong class="text-accent text-xl tracking-wider ml-1"><?php echo MPESA_PAYBILL; ?></strong>
-                        </p>
-                        <p class="text-slate-400 text-sm mt-0.5">Account: <span class="text-white font-medium">Customer Name / Account No.</span></p>
+                        <h4 class="text-xl font-bold mb-1">Service Areas</h4>
+                        <p class="text-slate-300 font-medium">Vihiga, Kakamega, and Nairobi, Kenya</p>
+                        <p class="text-slate-400 text-sm mt-1">Available for both residential fiber and commercial installations.</p>
                     </div>
                 </div>
 

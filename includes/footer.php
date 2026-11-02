@@ -87,11 +87,7 @@
             <ul class="flex flex-col gap-4 text-slate-400">
                 <li class="flex items-start gap-3">
                     <i data-lucide="map-pin" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
-                    <div>
-                        <span class="text-white font-medium text-sm"><?php echo SITE_ADDRESS_PHYSICAL; ?></span>
-                        <p class="text-xs text-slate-500 mt-0.5"><?php echo SITE_ADDRESS_POSTAL; ?></p>
-                        <p class="text-xs text-slate-500">Coverage: Vihiga, Kakamega & Nairobi</p>
-                    </div>
+                    <span class="text-slate-300 text-sm">Serving Vihiga, Kakamega & Nairobi, Kenya</span>
                 </li>
                 <li class="flex items-start gap-3">
                     <i data-lucide="phone" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
@@ -100,9 +96,9 @@
                             <span class="text-white font-medium"><?php echo SITE_PHONE; ?></span>
                             <span class="text-xs text-slate-500">(Helpline)</span>
                         </a>
-                        <a href="<?php echo format_tel_link(SITE_PHONE_CORPORATE); ?>" class="hover:text-primary transition-colors flex items-center gap-1.5 text-sm">
-                            <span class="text-white font-medium"><?php echo SITE_PHONE_CORPORATE; ?></span>
-                            <span class="text-xs text-slate-500">(Corporate)</span>
+                        <a href="<?php echo format_tel_link(SITE_PHONE_SECONDARY); ?>" class="hover:text-primary transition-colors flex items-center gap-1.5 text-sm">
+                            <span class="text-white font-medium"><?php echo SITE_PHONE_SECONDARY; ?></span>
+                            <span class="text-xs text-slate-500">(Secondary)</span>
                         </a>
                     </div>
                 </li>
@@ -115,9 +111,9 @@
                             class="hover:text-primary transition-colors text-xs text-slate-500"><?php echo SITE_EMAIL_SALES; ?></a>
                     </div>
                 </li>
-                <li class="flex items-center gap-3">
-                    <i data-lucide="credit-card" class="w-5 h-5 text-accent shrink-0"></i>
-                    <span class="text-sm">Paybill: <strong class="text-accent tracking-wider ml-1"><?php echo MPESA_PAYBILL; ?></strong></span>
+                <li class="flex items-start gap-3 mt-1">
+                    <i data-lucide="clock" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
+                    <span class="text-xs text-slate-400">Mon - Sat: 8:00 AM - 6:00 PM<br>Technical Support: 24/7</span>
                 </li>
             </ul>
         </div>
