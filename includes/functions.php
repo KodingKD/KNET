@@ -39,6 +39,18 @@ function is_active_page($page)
 /**
  * Format phone number for WhatsApp link
  */
+/**
+ * Format phone number for tel: link (with international prefix)
+ */
+function format_tel_link($phone)
+{
+    $clean = preg_replace('/[^0-9+]/', '', $phone);
+    if (strpos($clean, '0') === 0) {
+        $clean = '+254' . substr($clean, 1);
+    }
+    return 'tel:' . $clean;
+}
+
 function format_whatsapp_link($phone, $message = "")
 {
     $clean_phone = preg_replace('/[^0-9]/', '', $phone);

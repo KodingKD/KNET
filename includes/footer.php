@@ -10,9 +10,10 @@
         <!-- Brand -->
         <div>
             <a href="index.php" class="flex items-center gap-2 mb-6">
-                <div
-                    class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-xl text-white">
-                    K</div>
+                <img src="<?php echo SITE_URL; ?>/assets/images/logo.jpg?v=2" alt="KNET Logo"
+                    width="40" height="40"
+                    style="height: 40px; width: 40px; max-width: 40px; max-height: 40px; object-fit: cover; border-radius: 9999px;"
+                    class="h-10 w-auto rounded-full">
                 <span class="font-extrabold text-xl tracking-tighter">KNET <span
                         class="text-primary">NETWORKS</span></span>
             </a>
@@ -20,18 +21,38 @@
                 Bridging the digital divide with lightning-fast, unlimited internet solutions for Western Kenya and
                 beyond.
             </p>
-            <div class="flex gap-4">
-                <a href="#"
+            <div class="flex flex-wrap gap-2.5">
+                <a href="<?php echo SOCIAL_LINKEDIN; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"
                     class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
-                    <i data-lucide="facebook"></i>
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
                 </a>
-                <a href="#"
+                <a href="<?php echo SOCIAL_FACEBOOK; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook"
                     class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
-                    <i data-lucide="instagram"></i>
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
                 </a>
-                <a href="#"
+                <a href="<?php echo SOCIAL_TWITTER; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="X (Twitter)"
                     class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
-                    <i data-lucide="twitter"></i>
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </a>
+                <a href="<?php echo SOCIAL_INSTAGRAM; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="<?php echo SOCIAL_YOUTUBE; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="YouTube"
+                    class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
+                    <i data-lucide="youtube" class="w-5 h-5"></i>
+                </a>
+                <a href="<?php echo SOCIAL_TIKTOK; ?>" target="_blank" rel="noopener noreferrer"
+                    aria-label="TikTok"
+                    class="w-10 h-10 bg-white/5 hover:bg-primary rounded-full flex items-center justify-center transition-all text-slate-300 hover:text-white">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.27 6.27 0 0 0 1.87-4.47V8.71a8.19 8.19 0 0 0 4.9 1.6V6.86a4.83 4.83 0 0 1-1-.17z"/>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -64,24 +85,39 @@
         <div>
             <h4 class="text-xl font-bold mb-6">Contact Us</h4>
             <ul class="flex flex-col gap-4 text-slate-400">
-                <li class="flex items-start gap-4">
+                <li class="flex items-start gap-3">
                     <i data-lucide="map-pin" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
-                    <span>Vihiga, Kakamega & Nairobi, Kenya</span>
+                    <div>
+                        <span class="text-white font-medium text-sm"><?php echo SITE_ADDRESS_PHYSICAL; ?></span>
+                        <p class="text-xs text-slate-500 mt-0.5"><?php echo SITE_ADDRESS_POSTAL; ?></p>
+                        <p class="text-xs text-slate-500">Coverage: Vihiga, Kakamega & Nairobi</p>
+                    </div>
                 </li>
-                <li class="flex items-center gap-4">
-                    <i data-lucide="phone" class="w-5 h-5 text-primary shrink-0"></i>
-                    <a href="tel:0743820177" class="hover:text-primary">
-                        <?php echo SITE_PHONE; ?>
-                    </a>
+                <li class="flex items-start gap-3">
+                    <i data-lucide="phone" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
+                    <div class="flex flex-col gap-1">
+                        <a href="<?php echo format_tel_link(SITE_PHONE); ?>" class="hover:text-primary transition-colors flex items-center gap-1.5 text-sm">
+                            <span class="text-white font-medium"><?php echo SITE_PHONE; ?></span>
+                            <span class="text-xs text-slate-500">(Helpline)</span>
+                        </a>
+                        <a href="<?php echo format_tel_link(SITE_PHONE_CORPORATE); ?>" class="hover:text-primary transition-colors flex items-center gap-1.5 text-sm">
+                            <span class="text-white font-medium"><?php echo SITE_PHONE_CORPORATE; ?></span>
+                            <span class="text-xs text-slate-500">(Corporate)</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="flex items-center gap-4">
-                    <i data-lucide="message-square" class="w-5 h-5 text-primary shrink-0"></i>
-                    <a href="mailto:<?php echo SITE_EMAIL_SUPPORT; ?>"
-                        class="hover:text-primary"><?php echo SITE_EMAIL_SUPPORT; ?></a>
+                <li class="flex items-start gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
+                    <div class="flex flex-col gap-1">
+                        <a href="mailto:<?php echo SITE_EMAIL_SUPPORT; ?>"
+                            class="hover:text-primary transition-colors text-sm"><?php echo SITE_EMAIL_SUPPORT; ?></a>
+                        <a href="mailto:<?php echo SITE_EMAIL_SALES; ?>"
+                            class="hover:text-primary transition-colors text-xs text-slate-500"><?php echo SITE_EMAIL_SALES; ?></a>
+                    </div>
                 </li>
-                <li class="flex items-start gap-4 mt-2">
-                    <i data-lucide="clock" class="w-5 h-5 text-primary shrink-0 mt-1"></i>
-                    <span>Mon - Sat: 8:00 AM - 6:00 PM<br>Sun: 10:00 AM - 3:00 PM</span>
+                <li class="flex items-center gap-3">
+                    <i data-lucide="credit-card" class="w-5 h-5 text-accent shrink-0"></i>
+                    <span class="text-sm">Paybill: <strong class="text-accent tracking-wider ml-1"><?php echo MPESA_PAYBILL; ?></strong></span>
                 </li>
             </ul>
         </div>

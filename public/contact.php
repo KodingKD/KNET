@@ -27,55 +27,144 @@ $pre_selected_service = $_GET['service'] ?? $_GET['interest'] ?? '';
         <div>
             <h2 class="text-3xl font-black mb-8">Direct Contact Info</h2>
             <div class="flex flex-col gap-8 mb-12">
+                <!-- Phone Numbers -->
                 <div class="flex gap-6 items-start">
                     <div
                         class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
                         <i data-lucide="phone" class="w-8 h-8"></i>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1">Phone Numbers</h4>
-                        <p class="text-slate-400 mb-1">
-                            <?php echo SITE_PHONE; ?>
-                        </p>
-                        <p class="text-slate-400">
-                            <?php echo SITE_PHONE_SECONDARY; ?>
-                        </p>
+                        <h4 class="text-xl font-bold mb-2">Phone & Helplines</h4>
+                        <div class="flex flex-col gap-2">
+                            <a href="<?php echo format_tel_link(SITE_PHONE); ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <i data-lucide="phone-call" class="w-4 h-4 text-primary group-hover:scale-110 transition-transform"></i>
+                                <span class="font-semibold text-white"><?php echo SITE_PHONE; ?></span>
+                                <span class="text-xs text-slate-400 bg-white/5 px-2 py-0.5 rounded">Primary Helpline</span>
+                            </a>
+                            <a href="<?php echo format_tel_link(SITE_PHONE_CORPORATE); ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <i data-lucide="building" class="w-4 h-4 text-primary group-hover:scale-110 transition-transform"></i>
+                                <span class="font-semibold text-white"><?php echo SITE_PHONE_CORPORATE; ?></span>
+                                <span class="text-xs text-slate-400 bg-white/5 px-2 py-0.5 rounded">Corporate Line</span>
+                            </a>
+                            <a href="<?php echo format_tel_link(SITE_PHONE_SECONDARY); ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <i data-lucide="phone" class="w-4 h-4 text-primary group-hover:scale-110 transition-transform"></i>
+                                <span class="font-semibold text-white"><?php echo SITE_PHONE_SECONDARY; ?></span>
+                                <span class="text-xs text-slate-400 bg-white/5 px-2 py-0.5 rounded">Secondary</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
+                <!-- WhatsApp -->
                 <div class="flex gap-6 items-start">
                     <div
                         class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent shrink-0">
                         <i data-lucide="message-circle" class="w-8 h-8"></i>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1">WhatsApp</h4>
-                        <p class="text-slate-400 mb-2">Chat with our sales team instantly.</p>
-                        <?php renderWhatsAppButton("Message Us Now", "sm"); ?>
+                        <h4 class="text-xl font-bold mb-1">WhatsApp Support</h4>
+                        <p class="text-slate-400 mb-2">Chat with our sales and technical support team instantly.</p>
+                        <?php renderWhatsAppButton("Message Us on WhatsApp", "sm"); ?>
                     </div>
                 </div>
 
+                <!-- Email Addresses -->
                 <div class="flex gap-6 items-start">
                     <div
                         class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
                         <i data-lucide="mail" class="w-8 h-8"></i>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1">Email Addresses</h4>
-                        <p class="text-slate-400 mb-1">Sales: <?php echo SITE_EMAIL_SALES; ?></p>
-                        <p class="text-slate-400 mb-1">Support: <?php echo SITE_EMAIL_SUPPORT; ?></p>
-                        <p class="text-slate-400">Admin: <?php echo SITE_EMAIL_ADMIN; ?></p>
+                        <h4 class="text-xl font-bold mb-2">Email Addresses</h4>
+                        <div class="flex flex-col gap-1.5">
+                            <a href="mailto:<?php echo SITE_EMAIL_SALES; ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="text-slate-400 text-sm w-20">Sales:</span>
+                                <span class="font-medium text-white"><?php echo SITE_EMAIL_SALES; ?></span>
+                            </a>
+                            <a href="mailto:<?php echo SITE_EMAIL_SUPPORT; ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="text-slate-400 text-sm w-20">Support:</span>
+                                <span class="font-medium text-white"><?php echo SITE_EMAIL_SUPPORT; ?></span>
+                            </a>
+                            <a href="mailto:<?php echo SITE_EMAIL_ADMIN; ?>"
+                                class="text-slate-300 hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="text-slate-400 text-sm w-20">Admin:</span>
+                                <span class="font-medium text-white"><?php echo SITE_EMAIL_ADMIN; ?></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Physical / Postal Address -->
                 <div class="flex gap-6 items-start">
                     <div
                         class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
                         <i data-lucide="map-pin" class="w-8 h-8"></i>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1">Service Areas</h4>
-                        <p class="text-slate-400">Vihiga, Kakamega, and Nairobi, Kenya</p>
+                        <h4 class="text-xl font-bold mb-1">Office & Service Areas</h4>
+                        <p class="text-white font-medium"><?php echo SITE_ADDRESS_PHYSICAL; ?></p>
+                        <p class="text-slate-400 text-sm mt-0.5"><?php echo SITE_ADDRESS_POSTAL; ?></p>
+                        <p class="text-slate-500 text-sm mt-1">Service Coverage: Vihiga, Kakamega, and Nairobi, Kenya</p>
+                    </div>
+                </div>
+
+                <!-- M-Pesa Paybill -->
+                <div class="flex gap-6 items-start">
+                    <div
+                        class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent shrink-0">
+                        <i data-lucide="credit-card" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">M-Pesa Payments</h4>
+                        <p class="text-slate-300">
+                            <span class="text-slate-400">Paybill Number:</span>
+                            <strong class="text-accent text-xl tracking-wider ml-1"><?php echo MPESA_PAYBILL; ?></strong>
+                        </p>
+                        <p class="text-slate-400 text-sm mt-0.5">Account: <span class="text-white font-medium">Customer Name / Account No.</span></p>
+                    </div>
+                </div>
+
+                <!-- Official Social Channels -->
+                <div class="flex gap-6 items-start">
+                    <div
+                        class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
+                        <i data-lucide="share-2" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">Connect On Social Channels</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="<?php echo SOCIAL_LINKEDIN; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                            </a>
+                            <a href="<?php echo SOCIAL_FACEBOOK; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <i data-lucide="facebook" class="w-4 h-4"></i> Facebook
+                            </a>
+                            <a href="<?php echo SOCIAL_TWITTER; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <i data-lucide="twitter" class="w-4 h-4"></i> Twitter/X
+                            </a>
+                            <a href="<?php echo SOCIAL_INSTAGRAM; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <i data-lucide="instagram" class="w-4 h-4"></i> Instagram
+                            </a>
+                            <a href="<?php echo SOCIAL_YOUTUBE; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <i data-lucide="youtube" class="w-4 h-4"></i> YouTube
+                            </a>
+                            <a href="<?php echo SOCIAL_TIKTOK; ?>" target="_blank" rel="noopener noreferrer"
+                                class="px-3.5 py-2 bg-white/5 hover:bg-primary rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors text-white">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.27 6.27 0 0 0 1.87-4.47V8.71a8.19 8.19 0 0 0 4.9 1.6V6.86a4.83 4.83 0 0 1-1-.17z"/>
+                                </svg> TikTok
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
