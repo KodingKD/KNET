@@ -144,6 +144,9 @@
     <i data-lucide="message-circle" class="w-8 h-8 fill-current"></i>
 </a>
 
+<!-- KNET AI Assistant Widget -->
+<?php include INCLUDES_PATH . '/ai-assistant.php'; ?>
+
 <!-- Initialize Lucide Icons -->
 <script>
     lucide.createIcons();

@@ -229,7 +229,85 @@ $products = [
         'highlight' => 'The #1 choice for cyber cafés, Wi-Fi voucher systems & clinics'
     ],
 
-    // 4. Ubiquiti Wireless Links & P2P
+    // 4. Managed Switches & Central Office OLTs
+    [
+        'id' => 'mikrotik-crs354-48g',
+        'category' => 'switches',
+        'name' => 'MikroTik CRS354-48G-4S+2Q+RM 48-Port Switch',
+        'subtitle' => 'High-Density 48x Gigabit • 4x 10G SFP+ • 2x 40G QSFP+ Aggregation',
+        'badge' => '⚡ 48x Gigabit • Dual 40G QSFP+',
+        'badge_class' => 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+        'image' => 'assets/images/products/CRS354-48G-4S+2Q+RM 48 Port Switch.webp',
+        'icon' => 'server',
+        'color' => 'from-indigo-500/20 to-purple-500/5',
+        'icon_color' => 'text-indigo-400',
+        'specs' => [
+            '48 x 10/100/1000 Mbps Gigabit Ethernet Ports with non-blocking throughput',
+            '4 x 10G SFP+ optical ports for high-speed fiber uplink distribution',
+            '2 x 40G QSFP+ ultra-fast interfaces for data center / core backhaul',
+            'Dual hot-swappable redundant power supplies for 100% mission-critical uptime'
+        ],
+        'highlight' => 'The premier core aggregation switch for ISPs, universities & enterprises'
+    ],
+    [
+        'id' => 'hioso-gpon-olt',
+        'category' => 'switches',
+        'name' => 'HiOSO 2-PON / 4-PON Central Office OLT (HA7302 / HA7304)',
+        'subtitle' => 'Carrier Central Optical Line Terminal • Powers 128 to 256 FTTH Subscribers',
+        'badge' => '🌐 FTTH Core • 1:128 Split OLT',
+        'badge_class' => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+        'image' => 'assets/images/products/HA7302CST HiOSO Olt 2 Pon.jpg',
+        'icon' => 'network',
+        'color' => 'from-emerald-500/20 to-teal-500/5',
+        'icon_color' => 'text-emerald-400',
+        'specs' => [
+            '2 or 4 PON optical ports supporting up to 1:64 / 1:128 split ratio per PON',
+            'Uplink: Gigabit Combo RJ45 ports + 10G SFP uplink slots for core routers',
+            'Comprehensive Layer 2/3 management, VLAN tag/trunk, DBA bandwidth allocation',
+            'Standard 19-inch 1U rackmount chassis with built-in cooling & AC power'
+        ],
+        'highlight' => 'Turnkey central optical terminal for residential estates & WISP networks'
+    ],
+    [
+        'id' => 'hioso-poe-switch',
+        'category' => 'switches',
+        'name' => 'HiOSO Gigabit Managed PoE+ Network Switch',
+        'subtitle' => 'High-Power IEEE 802.3af/at PoE+ with Gigabit Optical SFP Uplinks',
+        'badge' => '🔌 PoE+ 30W/Port • SFP Uplink',
+        'badge_class' => 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+        'image' => 'assets/images/products/Hioso Ethernet Switch.jpg',
+        'icon' => 'layers',
+        'color' => 'from-cyan-500/20 to-blue-500/5',
+        'icon_color' => 'text-cyan-400',
+        'specs' => [
+            '8 or 16 Gigabit PoE+ ports delivering up to 30W per port for cameras & APs',
+            '2 x Gigabit SFP optical uplink ports for long-range backbone transmission',
+            '4KV lightning surge protection on all ports for outdoor mast safety',
+            'Hardware VLAN isolation switch prevents broadcast storms across subscribers'
+        ],
+        'highlight' => 'Ideal power and data switch for CCTV surveillance & wireless base stations'
+    ],
+    [
+        'id' => 'olt-sfp-transceiver',
+        'category' => 'switches',
+        'name' => 'High-Power GPON & EPON OLT SFP Transceivers (Class C++)',
+        'subtitle' => 'High TX Power Optical Transceivers for Extended 20km FTTH Reach',
+        'badge' => '💎 Class C++ • +7dBm High TX',
+        'badge_class' => 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+        'image' => 'assets/images/products/EPON OLT SFP.jpg',
+        'icon' => 'zap',
+        'color' => 'from-yellow-500/20 to-amber-500/5',
+        'icon_color' => 'text-yellow-400',
+        'specs' => [
+            'Class C++ optical budget: +4.5dBm to +7.5dBm transmit power',
+            'SC/UPC simplex single-mode optical connector (1490nm TX / 1310nm RX)',
+            'Ultra-high receiver sensitivity (-32dBm) supports high 1:64 and 1:128 splits',
+            'Hot-pluggable SFP footprint fully compatible with HiOSO, Huawei, and ZTE OLTs'
+        ],
+        'highlight' => 'Essential high-budget optical modules for rural and long-reach fiber routes'
+    ],
+
+    // 5. Ubiquiti Wireless Links & P2P
     [
         'id' => 'ubiquiti-litebeam-m5',
         'category' => 'ubiquiti',
@@ -529,6 +607,11 @@ $products = [
             :class="activeCategory === 'routers' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
             class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
             <i data-lucide="router" class="w-4 h-4 text-orange-400"></i> Wi-Fi & ONUs
+        </button>
+        <button @click="activeCategory = 'switches'"
+            :class="activeCategory === 'switches' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
+            class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
+            <i data-lucide="layers" class="w-4 h-4 text-indigo-400"></i> Switches & OLTs
         </button>
         <button @click="activeCategory = 'mikrotik'"
             :class="activeCategory === 'mikrotik' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
