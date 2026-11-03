@@ -495,8 +495,8 @@ $products = [
                     <i data-lucide="wrench" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <span class="block text-xs font-bold text-white">Technician Setup</span>
-                    <span class="text-[11px] text-slate-400">Free configuration guide</span>
+                    <span class="block text-xs font-bold text-white">Optional Tech Setup</span>
+                    <span class="text-[11px] text-slate-400">Assistance upon request</span>
                 </div>
             </div>
             <div class="bg-card-bg/60 border border-white/5 p-4 rounded-2xl flex items-center gap-3">
@@ -504,8 +504,8 @@ $products = [
                     <i data-lucide="credit-card" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <span class="block text-xs font-bold text-white">M-Pesa on Delivery</span>
-                    <span class="text-[11px] text-slate-400">Pickup & parcel verified</span>
+                    <span class="block text-xs font-bold text-white">Cash With Order</span>
+                    <span class="text-[11px] text-slate-400">Terms: M-Pesa on order</span>
                 </div>
             </div>
         </div>
@@ -656,7 +656,7 @@ $products = [
             </div>
             <h2 class="text-3xl md:text-5xl font-black mb-4">How Ordering & Delivery Works</h2>
             <p class="text-slate-400 text-sm md:text-base">
-                Whether you need a single router for your home or 500m of fiber cable for a field project, we keep it simple.
+                Whether you need a single router for your home or 1km of fiber cable for a field project, we keep it simple.
             </p>
         </div>
 
@@ -667,7 +667,7 @@ $products = [
                 </div>
                 <h3 class="text-xl font-black text-white mb-3">Live WhatsApp Check</h3>
                 <p class="text-sm text-slate-400 leading-relaxed">
-                    Click "Check Today's Price" on any item. We immediately confirm current batch stock, today's best price, and dispatch time.
+                    Click "Check Today's Price" on any item. We immediately confirm current batch stock, today's best price, and dispatch time. Terms are cash with order.
                 </p>
             </div>
 
@@ -685,9 +685,9 @@ $products = [
                 <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 font-black text-xl mb-6">
                     3
                 </div>
-                <h3 class="text-xl font-black text-white mb-3">Setup Support & Warranty</h3>
+                <h3 class="text-xl font-black text-white mb-3">1-Yr Warranty & Optional Setup</h3>
                 <p class="text-sm text-slate-400 leading-relaxed">
-                    Our field technicians will guide you over the phone or WhatsApp on setting up your router, UPS, or wireless link in under 5 minutes.
+                    All hardware includes a 12-month manufacturer replacement warranty. Optional professional technician installation and configuration are available upon request.
                 </p>
             </div>
         </div>
@@ -739,6 +739,16 @@ $products = [
             </button>
             <div x-show="openFaq === 4" x-collapse class="px-5 pb-5 text-sm text-slate-400 leading-relaxed border-t border-white/5 pt-4">
                 Yes! For local contractors, schools, hotels, and fellow WISPs purchasing multiple drums of drop fiber, Cat6 boxes, or multiple MikroTik routers, contact our operations desk on WhatsApp for custom contractor project quotes.
+            </div>
+        </div>
+
+        <div class="bg-card-bg border border-white/5 rounded-2xl overflow-hidden">
+            <button @click="openFaq = (openFaq === 5 ? null : 5)" class="w-full p-5 text-left font-bold text-white flex items-center justify-between">
+                <span>What are the payment terms and is technician setup included?</span>
+                <i data-lucide="chevron-down" :class="openFaq === 5 ? 'rotate-180' : ''" class="w-5 h-5 text-primary transition-transform"></i>
+            </button>
+            <div x-show="openFaq === 5" x-collapse class="px-5 pb-5 text-sm text-slate-400 leading-relaxed border-t border-white/5 pt-4">
+                Our terms are strictly <strong>cash with order</strong> (M-Pesa payment confirmed prior to dispatch) or payment upon in-person collection. All hardware includes manufacturer quick-start documentation. If you require specialized on-site installation or professional network configuration by a KNET technician, this is available as an optional service with transparent rates agreed upon prior to dispatch.
             </div>
         </div>
     </div>
