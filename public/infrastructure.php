@@ -26,9 +26,12 @@ include INCLUDES_PATH . '/header.php';
             <a href="#partner-form" class="bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-primary/20 btn-glow">
                 <i data-lucide="handshake"></i> Partner With Our Field Team
             </a>
+            <a href="capability-statement.php" target="_blank" class="bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-xl font-bold flex items-center gap-2 transition-all border border-white/20">
+                <i data-lucide="file-text" class="w-5 h-5 text-accent"></i> Download Capability Statement (PDF)
+            </a>
             <?php renderWhatsAppButton("Inquire on WhatsApp", "md", "Hello KNET Engineering Team, I would like to inquire about your telecom subcontracting and field services."); ?>
             <a href="<?php echo format_tel_link(SITE_PHONE); ?>" class="bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all border border-white/10">
-                <i data-lucide="phone"></i> Call Ops Direct: <?php echo SITE_PHONE; ?>
+                <i data-lucide="phone"></i> Call Ops: <?php echo SITE_PHONE; ?>
             </a>
         </div>
     </div>
