@@ -16,6 +16,7 @@ define('SITE_PHONE', '0743 820 177');
 define('SITE_PHONE_SECONDARY', '0704 250 216');
 define('SITE_PHONE_CORPORATE', '0182 663 137');
 define('WHATSAPP_NUMBER', '254743820177');
+define('SITE_WHATSAPP', '254743820177');
 
 // Corporate Details & Addresses
 define('SITE_ADDRESS_PHYSICAL', 'Ngong Road, Dagoretti, Nairobi, Kenya');

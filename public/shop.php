@@ -1,23 +1,64 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/db_connect.php';
 require_once __DIR__ . '/../includes/functions.php';
 
-$page_title = "Hardware & Equipment Store | KNET Networks";
-$page_description = "Genuine Wi-Fi routers, Mini-UPS blackout battery backups, MikroTik, Ubiquiti, and fiber infrastructure in Western Kenya with live daily pricing via WhatsApp.";
-$page_keywords = "Mini UPS Kenya, Tenda F6 Router Kenya, MikroTik L009 Vihiga, Ubiquiti LiteBeam Kakamega, Vastwood Telecom Kenya, Starlink Ethernet Adapter Kenya, Buy Fiber Cable Western Kenya";
+$page_title = "Hardware & Energy Storage Store | KNET Networks";
+$page_description = "Genuine Wi-Fi routers, Vestwoods & EcoFlow power backups, Mini-UPS blackout shields, MikroTik, Ubiquiti, and fiber infrastructure in Western Kenya with live daily pricing via WhatsApp.";
+$page_keywords = "Vestwoods Battery Kenya, EcoFlow Kenya, Mini UPS Kenya, Tenda F6 Router Kenya, MikroTik L009 Vihiga, Ubiquiti LiteBeam Kakamega, Starlink Ethernet Adapter Kenya, Buy Fiber Cable Western Kenya";
 
 include INCLUDES_PATH . '/header.php';
 
-// Product Catalog Array (Option A: Live Daily Market Quotes via Vastwood Supply)
+// Safe WhatsApp Number
+$wa_number = defined('WHATSAPP_NUMBER') ? WHATSAPP_NUMBER : (defined('SITE_WHATSAPP') ? SITE_WHATSAPP : '254743820177');
+$wa_clean = str_replace(['+', ' '], '', $wa_number);
+
+// Product Catalog Array (Option A: Live Daily Market Quotes)
 $products = [
-    // 1. Power & Mini-UPS (Blackout Shields)
+    // 1. Power Resilience & Energy Storage (Vestwoods, EcoFlow, Marsriva)
+    [
+        'id' => 'vestwoods-1kva',
+        'category' => 'power',
+        'name' => 'Vestwoods 1kVA / 1.2kWh Lithium Energy Storage Station',
+        'subtitle' => 'Heavy-Duty LiFePO4 Inverter Backup • Powers Routers, Laptops & Lights for 8–14+ Hours',
+        'badge' => '⚡ 1kVA Inverter • LiFePO4 Battery',
+        'badge_class' => 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+        'image' => null,
+        'icon' => 'zap',
+        'color' => 'from-amber-500/20 to-orange-500/5',
+        'icon_color' => 'text-amber-400',
+        'specs' => [
+            '1kVA (1000W) Pure Sine Wave Inverter Output (safe for sensitive electronics)',
+            'Long-life LiFePO4 Lithium battery cell chemistry (4,000+ deep cycles / 10-yr lifespan)',
+            'Powers Wi-Fi routers, laptops, monitors, LED lighting, and TVs simultaneously',
+            'Instant automatic switchover (< 10ms UPS mode) during Kenya Power blackouts'
+        ],
+        'highlight' => 'Industrial-grade energy storage engineered for home office & telecom'
+    ],
+    [
+        'id' => 'ecoflow-power-station',
+        'category' => 'power',
+        'name' => 'EcoFlow Smart Portable Lithium Power Station',
+        'subtitle' => 'Ultra-Fast 60-Min AC Recharge • The Gold Standard in Portable Blackout Backup',
+        'badge' => '🚀 60-Min Fast Charge • EcoFlow',
+        'badge_class' => 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+        'image' => null,
+        'icon' => 'battery-charging',
+        'color' => 'from-blue-500/20 to-cyan-500/5',
+        'icon_color' => 'text-blue-400',
+        'specs' => [
+            'Patented X-Stream AC Fast-Charging: 0% to 100% in under 60 minutes',
+            'LiFePO4 battery providing 3,000+ cycles to 80% capacity (10+ years of daily use)',
+            'Multiple outputs: 220V AC wall socket, USB-C 100W PD, and 12V DC ports',
+            'Smart smartphone app control via Wi-Fi & Bluetooth with real-time monitoring'
+        ],
+        'highlight' => 'The ultimate power backup for remote working, professionals & video creators'
+    ],
     [
         'id' => 'marsriva-kp3',
         'category' => 'power',
         'name' => 'Marsriva KP3 Smart Mini-UPS (10,000mAh)',
-        'subtitle' => '4-6 Hour Blackout Power Shield for Wi-Fi Routers',
-        'badge' => '🔥 Top Seller • Blackout Shield',
+        'subtitle' => '4-6 Hour Blackout Power Shield for Wi-Fi Routers & Optical ONUs',
+        'badge' => '🔥 Top Seller • Router Backup',
         'badge_class' => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
         'image' => null,
         'icon' => 'battery-charging',
@@ -29,7 +70,7 @@ $products = [
             'Zero Cutover Delay: prevents router reboot and dropped video calls',
             'Y-Splitter cable included: powers ONT + Router simultaneously'
         ],
-        'highlight' => 'Tested on Safaricom, KNET, Airtel & Zuku Routers'
+        'highlight' => 'Tested and verified on Safaricom, KNET, Airtel & Zuku Routers'
     ],
     [
         'id' => 'marsriva-kp7-poe',
@@ -37,11 +78,11 @@ $products = [
         'name' => 'Marsriva KP7 Heavy-Duty POE + DC Mini-UPS (16,000mAh)',
         'subtitle' => '6-8+ Hour High-Capacity Backup for Routers & Wireless Antennas',
         'badge' => '⚡ POE + DC • Heavy Duty',
-        'badge_class' => 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+        'badge_class' => 'bg-orange-500/10 text-orange-400 border-orange-500/20',
         'image' => null,
         'icon' => 'zap',
-        'color' => 'from-amber-500/20 to-orange-500/5',
-        'icon_color' => 'text-amber-400',
+        'color' => 'from-orange-500/20 to-amber-500/5',
+        'icon_color' => 'text-orange-400',
         'specs' => [
             'Massive 16,000mAh Battery Capacity (6–8+ hrs runtime)',
             'Gigabit POE Output (15V / 24V) for wireless CPEs & antennas',
@@ -129,7 +170,7 @@ $products = [
         'highlight' => 'Works with all ISP fiber routers with zero complicated setup'
     ],
 
-    // 3. MikroTik Enterprise & WISP Routing (Vastwood Supply)
+    // 3. MikroTik Enterprise & WISP Routing
     [
         'id' => 'mikrotik-l009',
         'category' => 'mikrotik',
@@ -188,7 +229,7 @@ $products = [
         'highlight' => 'The #1 choice for cyber cafés, Wi-Fi voucher systems & clinics'
     ],
 
-    // 4. Ubiquiti Wireless Links & P2P (Vastwood Supply)
+    // 4. Ubiquiti Wireless Links & P2P
     [
         'id' => 'ubiquiti-litebeam-m5',
         'category' => 'ubiquiti',
@@ -228,7 +269,7 @@ $products = [
         'highlight' => 'Trusted workhorse for short-to-medium distance wireless extension'
     ],
 
-    // 5. Cabling & Infrastructure (Vastwood Supply)
+    // 5. Cabling & Infrastructure
     [
         'id' => 'drop-cable-1km',
         'category' => 'infrastructure',
@@ -246,7 +287,7 @@ $products = [
             'Two parallel FRP strength members protecting the central optical core',
             'LSZH UV-resistant outer jacket built for direct sun & rain exposure'
         ],
-        'highlight' => 'Vastwood certified drum for FTTH last-mile subscriber drops'
+        'highlight' => 'High-performance drum for FTTH last-mile subscriber drops'
     ],
     [
         'id' => 'easenet-cat6-305m',
@@ -396,14 +437,13 @@ $products = [
 <section class="relative py-20 px-4 md:px-8 overflow-hidden bg-gradient-to-b from-primary/15 via-transparent to-transparent">
     <div class="max-w-7xl mx-auto text-center relative z-10">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs uppercase font-extrabold tracking-widest mb-6">
-            <i data-lucide="shield-check" class="w-4 h-4"></i> Official KNET Equipment Desk • Vastwood Supply Network
+            <i data-lucide="shield-check" class="w-4 h-4"></i> Official KNET Hardware & Energy Solutions
         </div>
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight tracking-tight">
             Genuine Telecom Gear & <span class="text-accent">Blackout Solutions</span>.
         </h1>
         <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-            Sourced directly from verified Nairobi supply networks (Vastwood) and delivered across Western Kenya. 
-            From blackout Mini-UPS to MikroTik, Ubiquiti, and full-drum fiber infrastructure.
+            Tested and deployed by KNET network engineers. Delivered across Western Kenya with local pickup in Vihiga, Kakamega, and nationwide courier dispatch.
         </p>
 
         <!-- Live Daily Sourcing Explainer Card -->
@@ -415,13 +455,13 @@ $products = [
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-1.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <h3 class="text-lg font-black text-white">Live Daily Market Rates (Zero Hidden Markup)</h3>
+                        <h3 class="text-lg font-black text-white">Live Daily Market Rates (Zero Outdated Markup)</h3>
                     </div>
                     <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
-                        Because global freight, container arrivals, and distributor foreign exchange rates fluctuate, we quote competitive, live daily batch prices directly via WhatsApp rather than locked static figures. Tap any product to confirm today's stock availability, best rate, and same-day delivery to your town in under 2 minutes.
+                        Because global freight, container arrivals, and distributor foreign exchange rates fluctuate, we quote competitive, live daily batch prices directly via WhatsApp rather than locked static figures. Tap any product below to confirm today's stock availability, best rate, and same-day delivery to your town in under 2 minutes.
                     </p>
                 </div>
-                <a href="<?php echo "https://wa.me/" . str_replace(['+', ' '], '', SITE_WHATSAPP) . "?text=" . urlencode("Hello KNET, I would like to inquire about today's price and stock for networking equipment."); ?>"
+                <a href="https://wa.me/<?php echo $wa_clean; ?>?text=<?php echo urlencode("Hello KNET Equipment Desk, I would like to inquire about today's price and stock for networking equipment."); ?>"
                     target="_blank" rel="noopener noreferrer"
                     class="bg-[#25D366] hover:bg-[#20ba59] text-white py-3 px-6 rounded-xl font-bold text-xs flex items-center gap-2 shrink-0 shadow-lg shadow-[#25D366]/20 transition-all">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
@@ -438,7 +478,7 @@ $products = [
                 </div>
                 <div>
                     <span class="block text-xs font-bold text-white">100% Genuine</span>
-                    <span class="text-[11px] text-slate-400">Verified Vastwood Supply</span>
+                    <span class="text-[11px] text-slate-400">Verified Brand Warranty</span>
                 </div>
             </div>
             <div class="bg-card-bg/60 border border-white/5 p-4 rounded-2xl flex items-center gap-3">
@@ -473,22 +513,22 @@ $products = [
 </section>
 
 <!-- Category Filter Tabs -->
-<section class="sticky top-20 z-30 bg-dark-bg/95 backdrop-blur-md border-y border-white/10 py-4 px-4 md:px-8 mb-12">
+<section id="catalog-section" class="sticky top-20 z-30 bg-dark-bg/95 backdrop-blur-md border-y border-white/10 py-4 px-4 md:px-8 mb-12">
     <div class="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-2 overflow-x-auto no-scrollbar py-1">
         <button @click="activeCategory = 'all'"
             :class="activeCategory === 'all' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
             class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
-            <i data-lucide="grid" class="w-4 h-4"></i> All Equipment (14)
+            <i data-lucide="grid" class="w-4 h-4"></i> All Products (<?php echo count($products); ?>)
         </button>
         <button @click="activeCategory = 'power'"
             :class="activeCategory === 'power' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
             class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
-            <i data-lucide="battery-charging" class="w-4 h-4 text-emerald-400"></i> Blackout Mini-UPS
+            <i data-lucide="battery-charging" class="w-4 h-4 text-emerald-400"></i> Energy & Mini-UPS
         </button>
         <button @click="activeCategory = 'routers'"
             :class="activeCategory === 'routers' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
             class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
-            <i data-lucide="router" class="w-4 h-4 text-orange-400"></i> Home Wi-Fi & ONUs
+            <i data-lucide="router" class="w-4 h-4 text-orange-400"></i> Wi-Fi & ONUs
         </button>
         <button @click="activeCategory = 'mikrotik'"
             :class="activeCategory === 'mikrotik' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
@@ -503,7 +543,7 @@ $products = [
         <button @click="activeCategory = 'infrastructure'"
             :class="activeCategory === 'infrastructure' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
             class="px-5 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-all flex items-center gap-2">
-            <i data-lucide="disc" class="w-4 h-4 text-yellow-400"></i> Fiber, Cat6 & Cabinets
+            <i data-lucide="disc" class="w-4 h-4 text-yellow-400"></i> Fiber & Cabling
         </button>
         <button @click="activeCategory = 'starlink'"
             :class="activeCategory === 'starlink' ? 'bg-primary text-white shadow-lg shadow-primary/25 font-bold' : 'bg-white/5 hover:bg-white/10 text-slate-300 font-medium'"
@@ -519,7 +559,7 @@ $products = [
         <?php foreach ($products as $prod): ?>
             <?php 
                 $wa_text = urlencode("Hello KNET Equipment Desk, what is today's current price and stock availability for the " . $prod['name'] . " for delivery to my location?");
-                $wa_url = "https://wa.me/" . str_replace(['+', ' '], '', SITE_WHATSAPP) . "?text=" . $wa_text;
+                $wa_url = "https://wa.me/" . $wa_clean . "?text=" . $wa_text;
             ?>
             <div x-show="activeCategory === 'all' || activeCategory === '<?php echo $prod['category']; ?>'"
                 x-transition:enter="transition ease-out duration-300"
@@ -627,7 +667,7 @@ $products = [
                 </div>
                 <h3 class="text-xl font-black text-white mb-3">Live WhatsApp Check</h3>
                 <p class="text-sm text-slate-400 leading-relaxed">
-                    Click "Check Today's Price" on any item. We immediately confirm current Vastwood batch stock, today's best price, and dispatch time.
+                    Click "Check Today's Price" on any item. We immediately confirm current batch stock, today's best price, and dispatch time.
                 </p>
             </div>
 
@@ -668,7 +708,7 @@ $products = [
                 <i data-lucide="chevron-down" :class="openFaq === 1 ? 'rotate-180' : ''" class="w-5 h-5 text-primary transition-transform"></i>
             </button>
             <div x-show="openFaq === 1" x-collapse class="px-5 pb-5 text-sm text-slate-400 leading-relaxed border-t border-white/5 pt-4">
-                In Kenya, telecommunications hardware and cabling fluctuate due to container shipping cycles, import duties, and foreign exchange movements. By quoting directly on WhatsApp, we guarantee you get the freshest batch price from our supply partners (Vastwood) without outdated website markups.
+                In Kenya, telecommunications hardware, batteries, and cabling fluctuate due to container shipping cycles, import duties, and foreign exchange movements. By quoting directly on WhatsApp, we guarantee you get the freshest batch price from our verified distributor partners without outdated website markups.
             </div>
         </div>
 
@@ -769,7 +809,7 @@ $products = [
 
             <div class="text-center pt-2">
                 <span class="text-xs text-slate-500">Or check live on </span>
-                <a :href="'https://wa.me/<?php echo str_replace(['+', ' '], '', SITE_WHATSAPP); ?>?text=' + encodeURIComponent('Hello KNET, what is today\'s price for ' + (selectedProduct ? selectedProduct.name : 'equipment') + '?')" target="_blank"
+                <a :href="'https://wa.me/<?php echo $wa_clean; ?>?text=' + encodeURIComponent('Hello KNET, what is today\'s price for ' + (selectedProduct ? selectedProduct.name : 'equipment') + '?')" target="_blank"
                     class="text-xs text-[#25D366] hover:underline font-bold">WhatsApp Here</a>
             </div>
         </form>
