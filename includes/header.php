@@ -98,6 +98,10 @@ require_once __DIR__ . '/components/cta-buttons.php';
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
         :root {
             --primary: #007BFF;
             --accent: #A4F500;

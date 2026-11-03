@@ -543,6 +543,10 @@ $catalog_schema = [
 <?php echo json_encode($catalog_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES); ?>
 </script>
 
+<style>
+[x-cloak] { display: none !important; }
+</style>
+
 <script>
 function initHardwareStore() {
     Alpine.data('hardwareStore', () => ({
@@ -777,24 +781,6 @@ if (window.Alpine) {
             </div>
         </div>
     </div>
-
-    <!-- Empty State (When Search/Filter yields 0 results) -->
-    <div x-show="filteredProductsCount === 0" x-cloak
-        class="text-center py-16 px-4 bg-card-bg/40 border border-white/5 rounded-3xl max-w-xl mx-auto my-8">
-        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
-            <i data-lucide="search-x" class="w-7 h-7 text-primary"></i>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">No hardware found matching your criteria</h3>
-        <p class="text-xs text-slate-400 mb-6 max-w-md mx-auto leading-relaxed">
-            Can't find the router, switch, or cable drum you need? Our Western Kenya desk sources directly from Nairobi distributor networks daily.
-        </p>
-        <a :href="'https://wa.me/' + waClean + '?text=' + encodeURIComponent('Hello KNET Equipment Desk, I am looking for hardware not listed on your shop: ' + (searchQuery || activeCategory))"
-            target="_blank" rel="noopener noreferrer"
-            data-track="whatsapp_empty_state_inquiry" data-track-label="Empty State CTA" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-all shadow-lg shadow-[#25D366]/20">
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <span>Can't find it? Ask us on WhatsApp</span>
-        </a>
-    </div>
 </section>
 
 <!-- Category Filter & Search Bar -->
@@ -865,24 +851,6 @@ if (window.Alpine) {
             </div>
         </div>
 
-    </div>
-
-    <!-- Empty State (When Search/Filter yields 0 results) -->
-    <div x-show="filteredProductsCount === 0" x-cloak
-        class="text-center py-16 px-4 bg-card-bg/40 border border-white/5 rounded-3xl max-w-xl mx-auto my-8">
-        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
-            <i data-lucide="search-x" class="w-7 h-7 text-primary"></i>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">No hardware found matching your criteria</h3>
-        <p class="text-xs text-slate-400 mb-6 max-w-md mx-auto leading-relaxed">
-            Can't find the router, switch, or cable drum you need? Our Western Kenya desk sources directly from Nairobi distributor networks daily.
-        </p>
-        <a :href="'https://wa.me/' + waClean + '?text=' + encodeURIComponent('Hello KNET Equipment Desk, I am looking for hardware not listed on your shop: ' + (searchQuery || activeCategory))"
-            target="_blank" rel="noopener noreferrer"
-            data-track="whatsapp_empty_state_inquiry" data-track-label="Empty State CTA" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-all shadow-lg shadow-[#25D366]/20">
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <span>Can't find it? Ask us on WhatsApp</span>
-        </a>
     </div>
 </section>
 <!-- Product Catalog Grid -->
@@ -1061,24 +1029,6 @@ if (window.Alpine) {
             </div>
         </div>
     </div>
-
-    <!-- Empty State (When Search/Filter yields 0 results) -->
-    <div x-show="filteredProductsCount === 0" x-cloak
-        class="text-center py-16 px-4 bg-card-bg/40 border border-white/5 rounded-3xl max-w-xl mx-auto my-8">
-        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
-            <i data-lucide="search-x" class="w-7 h-7 text-primary"></i>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">No hardware found matching your criteria</h3>
-        <p class="text-xs text-slate-400 mb-6 max-w-md mx-auto leading-relaxed">
-            Can't find the router, switch, or cable drum you need? Our Western Kenya desk sources directly from Nairobi distributor networks daily.
-        </p>
-        <a :href="'https://wa.me/' + waClean + '?text=' + encodeURIComponent('Hello KNET Equipment Desk, I am looking for hardware not listed on your shop: ' + (searchQuery || activeCategory))"
-            target="_blank" rel="noopener noreferrer"
-            data-track="whatsapp_empty_state_inquiry" data-track-label="Empty State CTA" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-all shadow-lg shadow-[#25D366]/20">
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <span>Can't find it? Ask us on WhatsApp</span>
-        </a>
-    </div>
 </section>
 
 <!-- Frequently Asked Questions -->
@@ -1139,24 +1089,6 @@ if (window.Alpine) {
             </div>
         </div>
     </div>
-
-    <!-- Empty State (When Search/Filter yields 0 results) -->
-    <div x-show="filteredProductsCount === 0" x-cloak
-        class="text-center py-16 px-4 bg-card-bg/40 border border-white/5 rounded-3xl max-w-xl mx-auto my-8">
-        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-4">
-            <i data-lucide="search-x" class="w-7 h-7 text-primary"></i>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">No hardware found matching your criteria</h3>
-        <p class="text-xs text-slate-400 mb-6 max-w-md mx-auto leading-relaxed">
-            Can't find the router, switch, or cable drum you need? Our Western Kenya desk sources directly from Nairobi distributor networks daily.
-        </p>
-        <a :href="'https://wa.me/' + waClean + '?text=' + encodeURIComponent('Hello KNET Equipment Desk, I am looking for hardware not listed on your shop: ' + (searchQuery || activeCategory))"
-            target="_blank" rel="noopener noreferrer"
-            data-track="whatsapp_empty_state_inquiry" data-track-label="Empty State CTA" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-all shadow-lg shadow-[#25D366]/20">
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <span>Can't find it? Ask us on WhatsApp</span>
-        </a>
-    </div>
 </section>
 
 <!-- Floating Enquiry List Bar -->
@@ -1204,7 +1136,7 @@ if (window.Alpine) {
     @keydown.tab="handleFocusTrap($event)">
     
     <!-- Backdrop Overlay -->
-    <div x-show="drawerOpen"
+    <div x-show="drawerOpen" x-cloak
         x-transition:enter="transition-opacity ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -1215,8 +1147,8 @@ if (window.Alpine) {
         class="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"></div>
 
     <!-- Drawer Panel: Bottom Sheet on Mobile, Slide-over on Desktop -->
-    <div class="fixed inset-0 pointer-events-none flex justify-end items-end md:items-stretch">
-        <div x-show="drawerOpen"
+    <div class="fixed inset-0 pointer-events-none flex justify-end items-end md:items-stretch" x-show="drawerOpen" x-cloak>
+        <div x-show="drawerOpen" x-cloak
             x-ref="drawerContent"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="translate-y-full md:translate-y-0 md:translate-x-full"
@@ -1321,11 +1253,11 @@ if (window.Alpine) {
                         Prefer our team to call you back? Submit your details and our Western Kenya desk will reach out in under 10 minutes.
                     </p>
 
-                    <div x-show="orderSuccess" class="bg-accent/20 border border-accent/30 text-accent p-4 rounded-xl text-center text-xs font-bold mb-4">
+                    <div x-show="orderSuccess" x-cloak class="bg-accent/20 border border-accent/30 text-accent p-4 rounded-xl text-center text-xs font-bold mb-4">
                         🎉 Thank you! Your quote request has been received. Our team will contact you within 10 minutes.
                     </div>
 
-                    <div x-show="orderError" class="bg-red-500/20 border border-red-500/30 text-red-400 p-3 rounded-xl text-center text-xs font-bold mb-4" x-text="orderError">
+                    <div x-show="orderError" x-cloak class="bg-red-500/20 border border-red-500/30 text-red-400 p-3 rounded-xl text-center text-xs font-bold mb-4" x-text="orderError">
                     </div>
 
                     <form @submit.prevent="submitOrder()" data-track="submit_quote_request" :data-track-label="selectedProduct ? selectedProduct.name : ''" class="space-y-3.5" x-show="!orderSuccess">
