@@ -173,7 +173,7 @@ require_once __DIR__ . '/components/cta-buttons.php';
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header -->
-    <header x-data="{ isOpen: false, isScrolled: false }" @scroll.window="isScrolled = (window.pageYOffset > 20)"
+    <header x-data="{ isOpen: false, isScrolled: false, servicesOpen: false, mobileServicesOpen: false }" @scroll.window="isScrolled = (window.pageYOffset > 20)"
         :class="{ 'glass-effect py-3 shadow-lg': isScrolled, 'bg-transparent py-5': !isScrolled }"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 md:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -187,70 +187,136 @@ require_once __DIR__ . '/components/cta-buttons.php';
                         class="text-primary">NETWORKS</span></span>
             </a>
 
-            <!-- Desktop Nav -->
+            <!-- Desktop Nav (Home · About · Services ▾ · Shop [New] · Coverage · Contact) -->
             <nav class="hidden lg:flex items-center gap-6 font-medium">
                 <a href="index.php" class="nav-link <?php echo is_active_page('index.php') ? 'active' : ''; ?>">Home</a>
-                <a href="about.php"
-                    class="nav-link <?php echo is_active_page('about.php') ? 'active' : ''; ?>">About</a>
-                <a href="services.php"
-                    class="nav-link <?php echo is_active_page('services.php') ? 'active' : ''; ?>">Services</a>
-                <a href="packages.php"
-                    class="nav-link <?php echo is_active_page('packages.php') ? 'active' : ''; ?>">Packages</a>
+                <a href="about.php" class="nav-link <?php echo is_active_page('about.php') ? 'active' : ''; ?>">About</a>
+                
+                <!-- Services Dropdown (Desktop) -->
+                <div class="relative" @click.outside="servicesOpen = false" @keydown.escape.window="servicesOpen = false">
+                    <button type="button"
+                        @click="servicesOpen = !servicesOpen"
+                        :aria-expanded="servicesOpen"
+                        class="nav-link flex items-center gap-1.5 py-1 <?php echo (is_active_page('services.php') || is_active_page('packages.php') || is_active_page('infrastructure.php')) ? 'active' : ''; ?>">
+                        <span>Services</span>
+                        <i data-lucide="chevron-down" :class="servicesOpen ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="servicesOpen" x-cloak
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                        class="absolute top-full left-0 mt-3 w-64 bg-card-bg/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-2 z-50">
+                        
+                        <a href="services.php"
+                            class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group <?php echo is_active_page('services.php') ? 'bg-white/5 text-primary' : ''; ?>">
+                            <div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="layers" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-white group-hover:text-primary transition-colors">Services Overview</span>
+                                <span class="text-[11px] text-slate-400">All consumer & enterprise connectivity</span>
+                            </div>
+                        </a>
+
+                        <a href="packages.php"
+                            class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group <?php echo is_active_page('packages.php') ? 'bg-white/5 text-primary' : ''; ?>">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="wifi" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-white group-hover:text-primary transition-colors">Internet Packages</span>
+                                <span class="text-[11px] text-slate-400">Home & business unlimited fiber</span>
+                            </div>
+                        </a>
+
+                        <a href="infrastructure.php"
+                            class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group <?php echo is_active_page('infrastructure.php') ? 'bg-white/5 text-primary' : ''; ?>">
+                            <div class="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-lucide="network" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-white group-hover:text-primary transition-colors">Carrier & Infra Subcontracting</span>
+                                <span class="text-[11px] text-slate-400">FTTH rollout, mast rigging & dark fiber</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
                 <a href="shop.php"
                     class="nav-link <?php echo is_active_page('shop.php') ? 'active' : ''; ?> flex items-center gap-1.5">
-                    <span>Hardware Store</span>
+                    <span>Shop</span>
                     <span class="text-[10px] bg-accent/20 text-accent px-1.5 py-0.5 rounded-full font-bold">New</span>
                 </a>
-                <a href="infrastructure.php"
-                    class="nav-link <?php echo is_active_page('infrastructure.php') ? 'active' : ''; ?>">Carrier & Infra</a>
-                <a href="coverage.php"
-                    class="nav-link <?php echo is_active_page('coverage.php') ? 'active' : ''; ?>">Coverage</a>
-                <a href="contact.php"
-                    class="nav-link <?php echo is_active_page('contact.php') ? 'active' : ''; ?>">Contact</a>
+                <a href="coverage.php" class="nav-link <?php echo is_active_page('coverage.php') ? 'active' : ''; ?>">Coverage</a>
+                <a href="contact.php" class="nav-link <?php echo is_active_page('contact.php') ? 'active' : ''; ?>">Contact</a>
             </nav>
 
-            <!-- Desktop CTAs -->
+            <!-- Desktop CTAs (Single Primary CTA: Call Now) -->
             <div class="hidden lg:flex items-center gap-4">
-                <?php renderWhatsAppButton("Chat", "sm"); ?>
                 <a href="tel:<?php echo str_replace(' ', '', SITE_PHONE); ?>"
-                    class="bg-primary hover:bg-primary-hover text-white px-5 py-2 rounded-lg font-bold flex items-center gap-2 transition-all btn-glow shadow-lg shadow-primary/20">
-                    <i data-lucide="phone"></i> Call Now
+                    class="bg-primary hover:bg-primary-hover text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 transition-all btn-glow shadow-lg shadow-primary/20">
+                    <i data-lucide="phone" class="w-4 h-4"></i> Call Now
                 </a>
             </div>
 
             <!-- Mobile Toggle -->
-            <button @click="isOpen = !isOpen" class="lg:hidden text-white p-2">
+            <button @click="isOpen = !isOpen" class="lg:hidden text-white p-2" aria-label="Toggle Navigation Menu">
                 <i data-lucide="menu" x-show="!isOpen"></i>
                 <i data-lucide="x" x-show="isOpen"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
-        <div x-show="isOpen" x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+        <!-- Mobile Menu (Accordion for Services, Single Call CTA) -->
+        <div x-show="isOpen" x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 -translate-y-4"
-            class="lg:hidden glass-effect mt-4 p-6 rounded-2xl flex flex-col gap-4 shadow-2xl">
-            <a href="index.php" class="text-lg font-semibold py-2">Home</a>
-            <a href="about.php" class="text-lg font-semibold py-2">About</a>
-            <a href="services.php" class="text-lg font-semibold py-2">Services</a>
-            <a href="packages.php" class="text-lg font-semibold py-2">Packages</a>
-            <a href="shop.php" class="text-lg font-semibold py-2 text-primary flex items-center justify-between">
-                <span>Hardware Store</span>
+            class="lg:hidden glass-effect mt-4 p-5 rounded-2xl flex flex-col gap-1 shadow-2xl">
+            
+            <a href="index.php" class="text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 <?php echo is_active_page('index.php') ? 'text-primary bg-white/5' : ''; ?>">Home</a>
+            <a href="about.php" class="text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 <?php echo is_active_page('about.php') ? 'text-primary bg-white/5' : ''; ?>">About</a>
+            
+            <!-- Mobile Services Accordion -->
+            <div class="py-1">
+                <button type="button" @click="mobileServicesOpen = !mobileServicesOpen"
+                    class="w-full text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between text-left <?php echo (is_active_page('services.php') || is_active_page('packages.php') || is_active_page('infrastructure.php')) ? 'text-primary bg-white/5' : ''; ?>">
+                    <span>Services</span>
+                    <i data-lucide="chevron-down" :class="mobileServicesOpen ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div x-show="mobileServicesOpen" x-collapse class="pl-4 pr-2 pt-1 pb-2 space-y-1">
+                    <a href="services.php" class="block text-sm py-2 px-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 <?php echo is_active_page('services.php') ? 'text-primary font-bold' : ''; ?>">
+                        Services Overview
+                    </a>
+                    <a href="packages.php" class="block text-sm py-2 px-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 <?php echo is_active_page('packages.php') ? 'text-primary font-bold' : ''; ?>">
+                        Internet Packages
+                    </a>
+                    <a href="infrastructure.php" class="block text-sm py-2 px-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 <?php echo is_active_page('infrastructure.php') ? 'text-accent font-bold' : ''; ?>">
+                        Carrier & Infra Subcontracting
+                    </a>
+                </div>
+            </div>
+
+            <a href="shop.php" class="text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between <?php echo is_active_page('shop.php') ? 'text-primary bg-white/5' : ''; ?>">
+                <span>Shop</span>
                 <span class="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold">New</span>
             </a>
-            <a href="infrastructure.php" class="text-lg font-semibold py-2 text-accent">Carrier & Infra Subcontracting</a>
-            <a href="coverage.php" class="text-lg font-semibold py-2">Coverage</a>
-            <a href="contact.php" class="text-lg font-semibold py-2 border-b border-white/10">Contact</a>
+            <a href="coverage.php" class="text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 <?php echo is_active_page('coverage.php') ? 'text-primary bg-white/5' : ''; ?>">Coverage</a>
+            <a href="contact.php" class="text-base font-semibold py-2 px-3 rounded-xl hover:bg-white/5 border-b border-white/10 pb-3 <?php echo is_active_page('contact.php') ? 'text-primary bg-white/5' : ''; ?>">Contact</a>
 
-            <div class="flex flex-col gap-3 mt-2">
-                <?php renderWhatsAppButton("WhatsApp", "md"); ?>
+            <div class="flex flex-col gap-3 mt-3 pt-2">
                 <a href="tel:<?php echo str_replace(' ', '', SITE_PHONE); ?>"
-                    class="bg-primary hover:bg-primary-hover text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2">
-                    <i data-lucide="phone"></i> Call Now
+                    class="bg-primary hover:bg-primary-hover text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                    <i data-lucide="phone" class="w-4 h-4"></i> Call Now
                 </a>
             </div>
         </div>
     </header>
-
     <main class="pt-24 lg:pt-32">
