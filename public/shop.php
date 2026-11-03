@@ -543,184 +543,195 @@ $catalog_schema = [
 <?php echo json_encode($catalog_schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES); ?>
 </script>
 
-<!-- Alpine.js Store Container -->
-<div x-data="{
-    activeCategory: 'all',
-    products: <?php echo json_encode($products, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
-    pricesUpdated: '<?php echo $prices_updated; ?>',
-    waClean: '<?php echo $wa_clean; ?>',
-    selectedProduct: null,
-    drawerOpen: false,
-    enquiryList: [],
-    searchQuery: '',
-    orderName: '',
-    orderPhone: '',
-    orderLocation: '',
-    orderNotes: '',
-    isSubmitting: false,
-    orderSuccess: false,
-    orderError: '',
+<script>
+function initHardwareStore() {
+    Alpine.data('hardwareStore', () => ({
+        activeCategory: 'all',
+        products: <?php echo json_encode($products); ?>,
+        pricesUpdated: <?php echo json_encode($prices_updated); ?>,
+        waClean: <?php echo json_encode($wa_clean); ?>,
+        selectedProduct: null,
+        drawerOpen: false,
+        enquiryList: [],
+        searchQuery: '',
+        orderName: '',
+        orderPhone: '',
+        orderLocation: '',
+        orderNotes: '',
+        isSubmitting: false,
+        orderSuccess: false,
+        orderError: '',
 
-    init() {
-        try {
-            const saved = localStorage.getItem('knet_enquiry_list');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                if (Array.isArray(parsed)) {
-                    this.enquiryList = parsed;
+        init() {
+            try {
+                const saved = localStorage.getItem('knet_enquiry_list');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed)) {
+                        this.enquiryList = parsed;
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not load enquiry list from localStorage', e);
+                this.enquiryList = [];
+            }
+        },
+
+        openProduct(id) {
+            const p = this.products.find(item => item.id === id);
+            if (p) {
+                this.selectedProduct = p;
+                this.orderSuccess = false;
+                this.orderError = '';
+                this.drawerOpen = true;
+                document.body.classList.add('overflow-hidden');
+                this.$nextTick(() => {
+                    if (window.lucide) window.lucide.createIcons();
+                    const first = this.$refs.drawerContent?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                    if (first) first.focus();
+                });
+            }
+        },
+
+        closeDrawer() {
+            this.drawerOpen = false;
+            document.body.classList.remove('overflow-hidden');
+        },
+
+        isEnquired(id) {
+            return this.enquiryList.includes(id);
+        },
+
+        toggleEnquiry(id) {
+            const index = this.enquiryList.indexOf(id);
+            if (index > -1) {
+                this.enquiryList.splice(index, 1);
+            } else {
+                this.enquiryList.push(id);
+            }
+            try {
+                localStorage.setItem('knet_enquiry_list', JSON.stringify(this.enquiryList));
+            } catch (e) {
+                console.warn('Could not save enquiry list to localStorage', e);
+            }
+        },
+
+        clearEnquiryList() {
+            this.enquiryList = [];
+            try {
+                localStorage.removeItem('knet_enquiry_list');
+            } catch (e) {
+                console.warn('Could not clear enquiry list from localStorage', e);
+            }
+        },
+
+        getSelectedProductWaUrl() {
+            if (!this.selectedProduct) return 'https://wa.me/' + this.waClean;
+            const msg = 'Hello KNET Equipment Desk, what is today\'s current price and stock availability for the ' + this.selectedProduct.name + ' for delivery to my location?';
+            return 'https://wa.me/' + this.waClean + '?text=' + encodeURIComponent(msg);
+        },
+
+        getEnquiryWhatsAppUrl() {
+            const selected = this.products.filter(p => this.enquiryList.includes(p.id));
+            let text = 'Hello KNET Equipment Desk, I would like to inquire about today\'s price, stock and delivery for the following items:\n\n';
+            selected.forEach((p, idx) => {
+                text += (idx + 1) + '. ' + p.name + '\n';
+            });
+            text += '\nPlease confirm today\'s live rate and availability for delivery to my area.';
+            return 'https://wa.me/' + this.waClean + '?text=' + encodeURIComponent(text);
+        },
+
+        handleFocusTrap(e) {
+            if (!this.drawerOpen || !this.$refs.drawerContent) return;
+            const focusables = this.$refs.drawerContent.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        },
+
+        matchesFilter(prod) {
+            let matchCat = (this.activeCategory === 'all');
+            if (!matchCat) {
+                if (this.activeCategory === 'wireless') {
+                    matchCat = (prod.category === 'mikrotik' || prod.category === 'ubiquiti' || prod.category === 'wireless');
+                } else if (this.activeCategory === 'routers') {
+                    matchCat = (prod.category === 'routers' || prod.category === 'starlink');
+                } else {
+                    matchCat = (prod.category === this.activeCategory);
                 }
             }
-        } catch (e) {
-            console.warn('Could not load enquiry list from localStorage', e);
-            this.enquiryList = [];
-        }
-    },
+            if (!this.searchQuery.trim()) return matchCat;
+            const q = this.searchQuery.toLowerCase().trim();
+            const matchName = prod.name ? prod.name.toLowerCase().includes(q) : false;
+            const matchSub = prod.subtitle ? prod.subtitle.toLowerCase().includes(q) : false;
+            return matchCat && (matchName || matchSub);
+        },
 
-    openProduct(id) {
-        const p = this.products.find(item => item.id === id);
-        if (p) {
-            this.selectedProduct = p;
-            this.orderSuccess = false;
+        matchesFilterById(id) {
+            const p = this.products.find(item => item.id === id);
+            return p ? this.matchesFilter(p) : false;
+        },
+
+        get filteredProductsCount() {
+            return this.products.filter(p => this.matchesFilter(p)).length;
+        },
+
+        submitOrder() {
+            if(!this.orderName || !this.orderPhone || !this.orderLocation) {
+                this.orderError = 'Please fill in your name, phone number, and location.';
+                return;
+            }
+            this.isSubmitting = true;
             this.orderError = '';
-            this.drawerOpen = true;
-            document.body.classList.add('overflow-hidden');
-            this.$nextTick(() => {
-                if (window.lucide) window.lucide.createIcons();
-                const first = this.$refs.drawerContent?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])');
-                if (first) first.focus();
+
+            const formData = new FormData();
+            formData.append('name', this.orderName);
+            formData.append('phone', this.orderPhone);
+            formData.append('subject', 'Equipment Quote: ' + (this.selectedProduct ? this.selectedProduct.name : 'Unknown Product'));
+            formData.append('message', 'Product: ' + (this.selectedProduct ? this.selectedProduct.name : '') + '\n' +
+                'Delivery Location: ' + this.orderLocation + '\n' +
+                'Customer Notes: ' + (this.orderNotes || 'None'));
+
+            fetch('api/contact-form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.isSubmitting = false;
+                if(data.success) {
+                    this.orderSuccess = true;
+                    this.orderName = '';
+                    this.orderPhone = '';
+                    this.orderLocation = '';
+                    this.orderNotes = '';
+                } else {
+                    this.orderError = data.message || 'Failed to submit quote request. Please try WhatsApp directly.';
+                }
+            })
+            .catch(err => {
+                this.isSubmitting = false;
+                this.orderError = 'Network error. Please try WhatsApp directly.';
             });
         }
-    },
+    }));
+}
+if (window.Alpine) {
+    initHardwareStore();
+} else {
+    document.addEventListener('alpine:init', initHardwareStore);
+}
+</script>
 
-    closeDrawer() {
-        this.drawerOpen = false;
-        document.body.classList.remove('overflow-hidden');
-    },
-
-    isEnquired(id) {
-        return this.enquiryList.includes(id);
-    },
-
-    toggleEnquiry(id) {
-        const index = this.enquiryList.indexOf(id);
-        if (index > -1) {
-            this.enquiryList.splice(index, 1);
-        } else {
-            this.enquiryList.push(id);
-        }
-        try {
-            localStorage.setItem('knet_enquiry_list', JSON.stringify(this.enquiryList));
-        } catch (e) {
-            console.warn('Could not save enquiry list to localStorage', e);
-        }
-    },
-
-    clearEnquiryList() {
-        this.enquiryList = [];
-        try {
-            localStorage.removeItem('knet_enquiry_list');
-        } catch (e) {
-            console.warn('Could not clear enquiry list from localStorage', e);
-        }
-    },
-
-    getSelectedProductWaUrl() {
-        if (!this.selectedProduct) return 'https://wa.me/' + this.waClean;
-        const msg = 'Hello KNET Equipment Desk, what is today\'s current price and stock availability for the ' + this.selectedProduct.name + ' for delivery to my location?';
-        return 'https://wa.me/' + this.waClean + '?text=' + encodeURIComponent(msg);
-    },
-
-    getEnquiryWhatsAppUrl() {
-        const selected = this.products.filter(p => this.enquiryList.includes(p.id));
-        let text = 'Hello KNET Equipment Desk, I would like to inquire about today\'s price, stock and delivery for the following items:\n\n';
-        selected.forEach((p, idx) => {
-            text += (idx + 1) + '. ' + p.name + '\n';
-        });
-        text += '\nPlease confirm today\'s live rate and availability for delivery to my area.';
-        return 'https://wa.me/' + this.waClean + '?text=' + encodeURIComponent(text);
-    },
-
-    handleFocusTrap(e) {
-        if (!this.drawerOpen || !this.$refs.drawerContent) return;
-        const focusables = this.$refs.drawerContent.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=\"-1\"])');
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-        }
-    },
-
-    matchesFilter(prod) {
-        let matchCat = (this.activeCategory === 'all');
-        if (!matchCat) {
-            if (this.activeCategory === 'wireless') {
-                matchCat = (prod.category === 'mikrotik' || prod.category === 'ubiquiti' || prod.category === 'wireless');
-            } else if (this.activeCategory === 'routers') {
-                matchCat = (prod.category === 'routers' || prod.category === 'starlink');
-            } else {
-                matchCat = (prod.category === this.activeCategory);
-            }
-        }
-        if (!this.searchQuery.trim()) return matchCat;
-        const q = this.searchQuery.toLowerCase().trim();
-        const matchName = prod.name ? prod.name.toLowerCase().includes(q) : false;
-        const matchSub = prod.subtitle ? prod.subtitle.toLowerCase().includes(q) : false;
-        return matchCat && (matchName || matchSub);
-    },
-
-    matchesFilterById(id) {
-        const p = this.products.find(item => item.id === id);
-        return p ? this.matchesFilter(p) : false;
-    },
-
-    get filteredProductsCount() {
-        return this.products.filter(p => this.matchesFilter(p)).length;
-    },
-
-    submitOrder() {
-        if(!this.orderName || !this.orderPhone || !this.orderLocation) {
-            this.orderError = 'Please fill in your name, phone number, and location.';
-            return;
-        }
-        this.isSubmitting = true;
-        this.orderError = '';
-
-        const formData = new FormData();
-        formData.append('name', this.orderName);
-        formData.append('phone', this.orderPhone);
-        formData.append('subject', 'Equipment Quote: ' + (this.selectedProduct ? this.selectedProduct.name : 'Unknown Product'));
-        formData.append('message', 'Product: ' + (this.selectedProduct ? this.selectedProduct.name : '') + '\n' +
-            'Delivery Location: ' + this.orderLocation + '\n' +
-            'Customer Notes: ' + (this.orderNotes || 'None'));
-
-        fetch('api/contact-form.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => res.json())
-        .then(data => {
-            this.isSubmitting = false;
-            if(data.success) {
-                this.orderSuccess = true;
-                this.orderName = '';
-                this.orderPhone = '';
-                this.orderLocation = '';
-                this.orderNotes = '';
-            } else {
-                this.orderError = data.message || 'Failed to submit quote request. Please try WhatsApp directly.';
-            }
-        })
-        .catch(err => {
-            this.isSubmitting = false;
-            this.orderError = 'Network error. Please try WhatsApp directly.';
-        });
-    }
-}">
+<!-- Alpine.js Store Container -->
+<div x-data="hardwareStore" class="relative">
 <!-- Hero Header Section (Compressed) -->
 <section class="relative py-10 md:py-14 px-4 md:px-8 overflow-hidden bg-gradient-to-b from-primary/15 via-transparent to-transparent">
     <div class="max-w-7xl mx-auto text-center relative z-10">
