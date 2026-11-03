@@ -64,6 +64,7 @@
                 <li><a href="about.php" class="hover:text-primary transition-colors">About Us</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Our Services</a></li>
                 <li><a href="packages.php" class="hover:text-primary transition-colors">Internet Packages</a></li>
+                <li><a href="shop.php" class="hover:text-primary transition-colors flex items-center gap-1.5"><span>Hardware Store</span><span class="text-[10px] bg-accent/20 text-accent px-1.5 py-0.5 rounded font-bold">New</span></a></li>
                 <li><a href="infrastructure.php" class="hover:text-primary transition-colors">Carrier & Infra</a></li>
                 <li><a href="coverage.php" class="hover:text-primary transition-colors">Coverage Map</a></li>
                 <li><a href="faqs.php" class="hover:text-primary transition-colors">FAQs</a></li>
@@ -80,6 +81,7 @@
                 <li><a href="services.php" class="hover:text-primary transition-colors">Wireless P2P</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Wi-Fi Hotspots</a></li>
                 <li><a href="services.php" class="hover:text-primary transition-colors">Starlink Support</a></li>
+                <li><a href="shop.php" class="hover:text-primary transition-colors">Equipment & Power Store</a></li>
             </ul>
         </div>
 

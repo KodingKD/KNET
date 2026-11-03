@@ -196,6 +196,11 @@ require_once __DIR__ . '/components/cta-buttons.php';
                     class="nav-link <?php echo is_active_page('services.php') ? 'active' : ''; ?>">Services</a>
                 <a href="packages.php"
                     class="nav-link <?php echo is_active_page('packages.php') ? 'active' : ''; ?>">Packages</a>
+                <a href="shop.php"
+                    class="nav-link <?php echo is_active_page('shop.php') ? 'active' : ''; ?> flex items-center gap-1.5">
+                    <span>Hardware Store</span>
+                    <span class="text-[10px] bg-accent/20 text-accent px-1.5 py-0.5 rounded-full font-bold">New</span>
+                </a>
                 <a href="infrastructure.php"
                     class="nav-link <?php echo is_active_page('infrastructure.php') ? 'active' : ''; ?>">Carrier & Infra</a>
                 <a href="coverage.php"
@@ -230,6 +235,10 @@ require_once __DIR__ . '/components/cta-buttons.php';
             <a href="about.php" class="text-lg font-semibold py-2">About</a>
             <a href="services.php" class="text-lg font-semibold py-2">Services</a>
             <a href="packages.php" class="text-lg font-semibold py-2">Packages</a>
+            <a href="shop.php" class="text-lg font-semibold py-2 text-primary flex items-center justify-between">
+                <span>Hardware Store</span>
+                <span class="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold">New</span>
+            </a>
             <a href="infrastructure.php" class="text-lg font-semibold py-2 text-accent">Carrier & Infra Subcontracting</a>
             <a href="coverage.php" class="text-lg font-semibold py-2">Coverage</a>
             <a href="contact.php" class="text-lg font-semibold py-2 border-b border-white/10">Contact</a>
